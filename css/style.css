@@ -111,6 +111,7 @@ form {
     max-width: 100vw;
     margin: 10px auto;
     padding: 20px;
+    position: relative;
 }
 
 form input {
@@ -130,6 +131,17 @@ form input#word {
     border-bottom: 2px solid var(--main-color);
     border-top: 2px solid var(--main-color);
 
+}
+
+form #wordLength {
+    position: absolute;
+    color: var(--main-color);
+    right: 50px;
+    bottom: 50%;
+    transform: translate(0, -50%);
+    font-size: 20px;
+    font-family: fantasy;
+    display: block;
 }
 
 form input[type='submit'] {
@@ -153,7 +165,22 @@ form input[type='submit'] {
     box-shadow: inset 0 0 10px var(--main-color);
     position: relative;
     z-index: 1;
+    border-radius: 10px;
+}
 
+#output.animation {
+    animation: anime 1S infinite linear;
+    animation-direction: alternate;
+}
+
+@keyframes anime {
+    0%,40%,80%{
+        background-color: var(--main-color);
+    }
+
+    20%,60%,100%{
+        background-color: transparent;
+    }
 }
 
 #output>p {
@@ -164,9 +191,30 @@ form input[type='submit'] {
     padding: 20px;
     padding-bottom: 50px;
     text-align: center;
+    text-transform: capitalize;
     line-break: anywhere;
     position: relative;
     font-size: 25px;
+}
+
+#output>p .show {
+    color: #0ff;
+    cursor: pointer;
+}
+
+#output .checking {
+    color: #0f0;
+    width: 100%;
+    padding: 20px;
+    position: absolute;
+    text-align: center;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    display: none;
+}
+#output .checking.active {
+    display: block;
 }
 
 #output .wordLength {
