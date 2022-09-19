@@ -5,7 +5,7 @@ it is simple Word Guessing Game
 
     
 ### Links:- 
-   - **[Word Guessing Game](https://keroloslotfy.github.io/geussWord/)**
+   - **[Word Guessing Game](https://keroloslotfy.github.io/guessWord/)**
    
 
 
