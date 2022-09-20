@@ -8,32 +8,37 @@
     <title>Word Guessing Game</title>
     <link rel="stylesheet" href="./css/style.css">
     <!-- icon moon -->
-    <link rel="stylesheet" href="https://i.icomoon.io/public/temp/8b30392188/UntitledProject/style.css">
-
+    <link rel="stylesheet" href="https://i.icomoon.io/public/temp/21d0c0c848/UntitledProject/style.css">
 </head>
+
 <body>
-    <div class="control">
-        <span class="icon-cog"></span>
-        <div class="colors">
-            <div class=" box" data-color='#e91e63'></div>
-            <div class="box" data-color='#009688'></div>
-            <div class="box" data-color='#03a9f4'></div>
-            <div class=" box" data-color='#0fffff'></div>
+    <div class="container">
+        <div class="control">
+            <div class="try">try: <span class="num"></span></div>
+            <span class="icon-cog"></span>
+            <div class="colors">
+                <div class=" box" data-color='#e91e63'></div>
+                <div class="box" data-color='#009688'></div>
+                <div class="box" data-color='#03a9f4'></div>
+                <div class=" box" data-color='#0fffff'></div>
+            </div>
         </div>
-    </div>
-    
-    <h1> Word Guessing Game <span class="icon-cool2"></span></h1>
-    <form action="">
-        <input type="text" id="word" placeholder="Guess Word" > 
-        <i id="wordLength" ></i>
-        <input type="submit" value="Guess">
-    </form>
-    
-    <div id="output">
-        <p></p>
-        <h4 class="checking">checking...</h4>
+
+        <h1> Word Guessing Game <span class="icon-cool2"></span></h1>
+        <form action="">
+            <input type="text" id="word" placeholder="Guess Word">
+            <i id="wordLength"></i>
+            <input type="submit" value="Guess">
+        </form>
+
+        <div id="output">
+            <p></p>
+            <h4 class="checking">checking...</h4>
+            <div class="tryAgain">Try Again</div>
+        </div>
     </div>
 
     <script src="./js/app.js"></script>
 </body>
+
 </html>

@@ -1,18 +1,17 @@
 // Global variables
 const guessBtn = document.querySelector('input[type="submit"]');
-const gearIcon = document.querySelector('.control span');
+const gearIcon = document.querySelector('.control > span');
 const colors = document.querySelectorAll('.colors > div ');
 const output = document.querySelector('#output > p');
 let wordLength = document.querySelector('form #wordLength');
+let tryBtn = document.querySelector('#output > .tryAgain');
+let tries = document.querySelector('.control > .try > span');
+tries.innerHTML = 3;
 let color = '';
 let words = [
-    'Kerolos',
     'Word',
     'Guess',
     'javaScript',
-    'HTMl',
-    'CSS',
-    'Chris',
     'academic',
     'ability',
     'account',
@@ -23,7 +22,9 @@ let words = [
     'adventure',
     'advice',
     'age',
-    'agency'
+    'agency',
+    'wood',
+    'work',
 ]
 let icon; // icon in output
 
@@ -42,6 +43,7 @@ guessBtn.addEventListener('click', (e) => {
     e.target.parentElement[0].blur();
     if (e.target.parentElement[0].value !== '') {
         document.querySelector('#output .checking').classList.add('active');
+        document.querySelector('#output').classList.remove('animation');
         // reset output to page
         output.innerHTML = '';
 
@@ -71,53 +73,57 @@ function selectRandomWordFrom(words) {
 
 // check Word
 function checkWord(word) {
-    let result = '';
+    let result = randomWord.split('');
     if (randomWord === word) {
-        result = randomWord;
-        icon = `👏`;
         document.querySelector('#output').classList.add('animation');
         output.innerHTML =
-            `${result}</span><i class='wordLength'>(${randomWord.length})
-        </i> <i class='wordLength'>${icon}</i>`;
-
+            `${randomWord}</span><i class='wordLength'>(${randomWord.length})</i> 
+            <i class='wordLength'>${icon}</i>`;
+        icon = `👏`;
     } else {
-        // for (let i = 0; i < randomWord.length; i++) {
-        //     if (randomWord[i] === word[i]) {
-        //         result += `${word[i]} `;
-        //     } else {
-        //         result += `✤ `;
-        //     }
-        // }
-        icon = `👎`;
-        for (let i = 0; i < word.length; i++) {
-            for (let j = 0; j < randomWord.length; j++) {
-                if (word[i] === randomWord[j]) {
-                    randomWord[j] = randomWord[j];
-                    console.log(randomWord[j]);
-                } else {
-                    randomWord[j] = `✤`;
-                    console.log(randomWord[j]);
-                }
+        for (let i = 0; i < result.length; i++) {
+            if (!word.includes(result[i])) {
+                result[i] = `✤ `;
             }
         }
-        result = randomWord;
-    }
-
-    // add New word To Page
-    output.innerHTML = `
-            ${result} <span class="icon-eye-blocked show" >
+        icon = `👎`;
+        // add New word To Page
+        output.innerHTML = `
+            ${result.join('')} <span class="icon-eye-blocked show" >
             </span><i class='wordLength'>(${randomWord.length})
             </i> <i class='wordLength'>${icon}</i>`;
-    // show random word
-    document.querySelector('#output > p .show').addEventListener('click', () => {
-        output.innerHTML = `
+        // show random word
+        document.querySelector('#output > p .show').addEventListener('click', () => {
+            output.innerHTML = `
         ${randomWord} 
         </span><i class='wordLength'>(${randomWord.length})
         `;
-    })
-    return result;
+        });
+
+        // tries
+        tries.innerHTML--;
+        if (tries.innerHTML == 0) {
+            tries.innerHTML = 3;
+            tryBtn.classList.add('active');
+            output.innerHTML =
+                `${randomWord}</span><i class='wordLength'>(${randomWord.length})</i>`;
+            // reload when guess button
+            guessBtn.addEventListener('click', () => {
+                location.reload();
+            })
+            
+            // reload when try Again button
+            tryAgain();
+        }
+    }
 }
 
+// try Again function
+function tryAgain() {
+    tryBtn.addEventListener('click', () => {
+        location.reload();
+    })
+}
 // change colors
 gearIcon.addEventListener('click', () => {
     gearIcon.parentElement.classList.toggle('active');
@@ -140,3 +146,5 @@ function setColorInlocalStorage(color = '') {
 function getColorInlocalStorage(color = '') {
     document.documentElement.style.setProperty('--main-color', color);
 }
+
+
