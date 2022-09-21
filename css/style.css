@@ -9,6 +9,7 @@
     outline: none;
 }
 
+
 /* Small Devices */
 @media (min-width: 768px) {
     .container {
@@ -130,7 +131,7 @@ h1 {
     width: 100%;
     color: var(--main-color);
     font-size: 40px;
-    margin-top: 60px;
+    margin-top: 50px;
 }
 
 h1>span {
@@ -141,7 +142,7 @@ h1>span {
 form {
     width: max-content;
     max-width: 100%;
-    margin: 10px auto;
+    margin: 5px auto;
     padding: 20px;
     position: relative;
 }
@@ -175,6 +176,27 @@ form #wordLength {
     display: block;
 }
 
+form .alert {
+    position: absolute;
+    background-color: var(--main-color);
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, 0);
+    font-size: 20px;
+    display: block;
+    padding: 10px;
+    width: max-content;
+    color: var(--text-color);
+    border-radius: 10px;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+}
+form > .alert.active {
+    opacity: 1;
+    visibility: visible;
+}
+
 form input[type='submit'] {
     width: 50px;
     height: 50px;
@@ -197,7 +219,11 @@ form input[type='submit'] {
     position: relative;
     z-index: 1;
     border-radius: 10px;
-    padding: 30px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; 
 }
 
 #output.animation {
@@ -216,43 +242,49 @@ form input[type='submit'] {
 }
 
 #output>p {
-    width: 100%;
-    max-width: 100%;
-    color: var(--text-color);
-    text-align: center;
-    line-break: anywhere;
+    width: 40px;
+    color: #fff;
+    height: 40px;
     position: relative;
-    font-size: 25px;
-}
-
-#output>p .show {
-    color: #0ff;
-    cursor: pointer;
-}
-
-#output .checking {
-    color: #0f0;
-    width: 100%;
-    padding: 20px;
-    position: absolute;
-    text-align: center;
-    left: 0;
-    top: 50%;
-    transform: translate(0, -50%);
-    display: none;
-}
-#output .checking.active {
-    display: block;
-}
-
-#output .wordLength {
-    width: 100%;
+    background-color: var(--main-color);
+    padding: 5px;
     text-transform: capitalize;
-    color: var(--main-color);
-    display: block;
+    text-align: center;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    margin: 5px;
 }
 
-#output .tryAgain {
+@media (min-width:768px) {
+    #output>p {
+    width: 50px;
+    color: #fff;
+    height: 50px;
+    padding: 10px;
+    margin: 10px;
+    }
+}
+
+#output .lettersNum { 
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    border-radius: 50%;
+    font-weight: bold;
+    padding: 10px;
+    font-size: 16px;
+    margin-left: 5px;
+    background-color:var(--main-color);
+}
+
+.tryAgain {
     background-color: var(--main-color);
     color: var(--text-color);
     padding: 10px;
@@ -263,7 +295,8 @@ form input[type='submit'] {
     font-size: 14px;
     display: none;
 }
-#output .tryAgain.active {
+
+.tryAgain.active {
     display: block;
 }
 footer {

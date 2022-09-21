@@ -2,13 +2,13 @@
 const guessBtn = document.querySelector('input[type="submit"]');
 const gearIcon = document.querySelector('.control > span');
 const colors = document.querySelectorAll('.colors > div ');
-const output = document.querySelector('#output > p');
+const output = document.querySelector('#output');
 let wordLength = document.querySelector('form #wordLength');
-let tryBtn = document.querySelector('#output > .tryAgain');
+let tryBtn = document.querySelector('.tryAgain');
 let tries = document.querySelector('.control > .try > span');
-tries.innerHTML = 3;
+tries.innerHTML = 5;
 let color = '';
-let words = [
+let arrOfWords = [
     'Word',
     'Guess',
     'javaScript',
@@ -26,8 +26,9 @@ let words = [
     'wood',
     'work',
 ]
-let icon; // icon in output
-
+let words = arrOfWords.map((w) => {
+    return w.toLowerCase();
+})
 // get Color from local Storage
 getColorInlocalStorage(localStorage.getItem('color'));
 
@@ -41,21 +42,19 @@ guessBtn.parentElement[0].oninput = () => {
 guessBtn.addEventListener('click', (e) => {
     e.preventDefault();
     e.target.parentElement[0].blur();
-    if (e.target.parentElement[0].value !== '') {
-        document.querySelector('#output .checking').classList.add('active');
+    if (e.target.parentElement[0].value !== '' && words.includes(e.target.parentElement[0].value.toLowerCase())) {
         document.querySelector('#output').classList.remove('animation');
-        // reset output to page
-        output.innerHTML = '';
-
-        setTimeout(() => {
-            document.querySelector('#output .checking').classList.remove('active');
-
-            // check Word
-            let word = e.target.parentElement[0].value.trim();
-            checkWord(word.toLowerCase());
-        }, 1000);
+        // check Word
+        let word = e.target.parentElement[0].value.trim();
+        checkWord(word.toLowerCase());
+    } else if (e.target.parentElement[0].value === '') {
+        e.target.parentElement[0].setAttribute('placeholder', 'please write the word');
     } else {
-        e.target.parentElement[0].setAttribute('placeholder', 'please write the word')
+        document.querySelector('form > .alert').classList.add('active')
+        setTimeout(() => {
+            document.querySelector('form > .alert').classList.remove('active')
+        }, 1000)
+
     }
 });
 
@@ -71,50 +70,68 @@ function selectRandomWordFrom(words) {
     }
 }
 
+// creat p elements according to randoword letters 
+for (let i = 0; i < randomWord.length; i++) {
+    let p = document.createElement('p');
+    document.querySelector('#output').append(p);
+}
+// show numbers of letters in random Word
+let lettersNum = document.createElement('div');
+lettersNum.className = 'lettersNum';
+lettersNum.innerText = randomWord.length;
+document.querySelector('#output').append(lettersNum);
+
+
 // check Word
 function checkWord(word) {
     let result = randomWord.split('');
     if (randomWord === word) {
         document.querySelector('#output').classList.add('animation');
-        output.innerHTML =
-            `${randomWord}</span><i class='wordLength'>(${randomWord.length})</i> 
-            <i class='wordLength'>${icon}</i>`;
-        icon = `👏`;
-    } else {
-        for (let i = 0; i < result.length; i++) {
-            if (!word.includes(result[i])) {
-                result[i] = `✤ `;
+        for (let i = 0; i < output.children.length - 1; i++) {
+            output.children[i].innerText = randomWord[i];
+            if (output.children[i].innerText !== '') {
+                output.children[i].style.backgroundColor = '#0f0';
+            } else {
+                output.children[i].style.backgroundColor = '#e91e63';
             }
         }
-        icon = `👎`;
+
+    } else {
+        for (let i = 0; i < result.length; i++) {
+            if (word.includes(result[i]) && result.indexOf(result[i]) === i) {
+                result[i] = result[i];
+            } else {
+                result[i] = '';
+            }
+        }
+
         // add New word To Page
-        output.innerHTML = `
-            ${result.join('')} <span class="icon-eye-blocked show" >
-            </span><i class='wordLength'>(${randomWord.length})
-            </i> <i class='wordLength'>${icon}</i>`;
-        // show random word
-        document.querySelector('#output > p .show').addEventListener('click', () => {
-            output.innerHTML = `
-        ${randomWord} 
-        </span><i class='wordLength'>(${randomWord.length})
-        `;
-        });
+        for (let i = 0; i < output.children.length - 1; i++) {
+            output.children[i].innerText = result[i];
+            if (output.children[i].innerText !== '') {
+                output.children[i].style.backgroundColor = '#0f0';
+            } else {
+                output.children[i].style.backgroundColor = '#e91e63';
+            }
+        }
 
         // tries
-        tries.innerHTML--;
         if (tries.innerHTML == 0) {
-            tries.innerHTML = 3;
             tryBtn.classList.add('active');
-            output.innerHTML =
-                `${randomWord}</span><i class='wordLength'>(${randomWord.length})</i>`;
-            // reload when guess button
-            guessBtn.addEventListener('click', () => {
-                location.reload();
-            })
-            
-            // reload when try Again button
-            tryAgain();
+            for (let i = 0; i < output.children.length - 1; i++) {
+                output.children[i].innerText = randomWord[i];
+                output.children[i].style.backgroundColor = '#e91e63';
+                // reload when guess button
+                guessBtn.addEventListener('click', () => {
+                    return false
+                });
+                // reload when try Again button
+                tryAgain();
+            }
+        } else {
+            tries.innerHTML -= 1;
         }
+
     }
 }
 
@@ -124,6 +141,9 @@ function tryAgain() {
         location.reload();
     })
 }
+
+
+
 // change colors
 gearIcon.addEventListener('click', () => {
     gearIcon.parentElement.classList.toggle('active');
