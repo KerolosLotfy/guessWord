@@ -1,22 +1,24 @@
 # Word Guessing Game
 
 ### descripton:-
+
 it is simple Word Guessing Game
 
-    
-### Links:- 
-   - **[Word Guessing Game](https://keroloslotfy.github.io/guessWord/)**
-   
+### Links:-
 
+- **[Word Guessing Game](https://keroloslotfy.github.io/guessWord/)**
 
 ### Used Lang:-
- - HTML
- - CSS
- - JavaScript
 
+- HTML
+- CSS
+- JavaScript
 
- ### get Words Api jSON Soon
-- **(https://raw.githubusercontent.com/dwyl/english-words/master/words_dictionary.json)**
+### Dependences:-
+
+- **(https://random-word-api.herokuapp.com/)**
+- **(https://dictionaryapi.dev/)**
 
 ### Author:-
+
 Kerolos Lotfy

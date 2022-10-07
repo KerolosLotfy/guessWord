@@ -1,315 +1,454 @@
 /******************************  Start Goblal **************************************/
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: transparent;
-    font-size: 25px;
-    border: none;
-    outline: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: transparent;
+  font-size: 25px;
+  border: none;
+  outline: none;
 }
-
 
 /* Small Devices */
 @media (min-width: 768px) {
-    .container {
-        width: 750px;
-    }
+  .container {
+    width: 750px;
+  }
 }
 
 /* Medium Devices */
 @media (min-width: 992px) {
-    .container {
-        width: 970px;
-    }
+  .container {
+    width: 970px;
+  }
 }
 
 /* Large Devices */
 @media (min-width: 1200px) {
-    .container {
-        width: 1170px;
-    }
+  .container {
+    width: 1170px;
+  }
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 :root {
-    --main-color: #03a9f4;
-    --text-color: #fff;
-    --num-of-colors: 4;
+  --main-color: #03a9f4;
+  --text-color: #fff;
+  --num-of-colors: 4;
 }
 
 body {
-    background-color: #000;
-    font-family: sans-serif;
+  background-color: #000;
+  font-family: sans-serif;
+  position: relative;
 }
 
 .container {
-    height: 100vh;
-    max-width: 100%;
-    position: relative;
-    padding: 0 10px;
-    margin: auto;
+  height: 100vh;
+  max-width: 100%;
+  position: relative;
+  padding: 0 10px;
+  margin: auto;
 }
 
 /******************************  End Goblal **************************************/
 
+/* loading */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.k_loader {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+}
+
+.k_loader.none {
+  display: none;
+}
+.k_loader div {
+  width: 50px;
+  height: 200px;
+  background-color: #2196f3;
+  border-radius: 50px;
+  position: relative;
+  z-index: 100;
+  animation: up-and-down 1s ease infinite alternate;
+  box-shadow: inset -20px -17px 10px 0px #fff;
+  zoom: 0.6;
+}
+
+.k_loader div:first-child {
+  z-index: 5;
+}
+
+.k_loader div:nth-child(2) {
+  transform: rotate(60deg) translate(-90px, 20px);
+  transform-origin: bottom;
+  height: 150px;
+  z-index: 2;
+}
+
+.k_loader div:nth-child(3) {
+  transform: rotate(-54deg) translate(10px, 15px);
+  transform-origin: bottom;
+  height: 160px;
+}
+
+.k_loader div:nth-child(4) {
+  transform: rotate(90deg);
+  width: 20px;
+  position: relative;
+  left: -90px;
+  top: 130px;
+  animation: none;
+  box-shadow: inset 3px -1px 11px 0px #fff;
+  position: relative;
+}
+
+.k_loader div:nth-child(4)::before {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: 0;
+  background-color: #fff;
+  width: 100%;
+  height: 0%;
+  animation: loading 5s infinite linear;
+  border-radius: inherit;
+}
+
+@keyframes up-and-down {
+  0% {
+    margin-bottom: -50px;
+    border-radius: 10px;
+  }
+
+  50% {
+    border-radius: 50px;
+  }
+
+  100% {
+    border-radius: 50px;
+    margin-bottom: 50px;
+  }
+}
+
+@keyframes loading {
+  0% {
+    height: 0;
+  }
+
+  100% {
+    height: 100%;
+  }
+}
 /******************************  header **************************************/
 .control {
-    width: 100%;
-    color: var(--main-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    padding: 15px 0;
+  width: 100%;
+  color: var(--main-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 15px 0;
 }
 
-
-
-.control>span {
-    display: inline-block;
-    cursor: pointer;
-    transition: transform 1s linear;
-    transform: rotate(0deg);
+.control > span {
+  display: inline-block;
+  cursor: pointer;
+  transition: transform 1s linear;
+  transform: rotate(0deg);
 }
 
-.control>.colors {
-position: absolute;
-    height: max-content;
-    width: 1px;
-    right: 30px;
-    top: 50%;
-    transform: translate(0, -50%);
-    display: flex;
-    gap: 20px;
-    box-shadow: inset 0 0 6px var(--main-color);
-    border-radius: 10px;
-    transition:  width 0.5s linear;
-    z-index: -2;
-    padding: 10px;
+.control > .colors {
+  position: absolute;
+  height: max-content;
+  width: 1px;
+  right: 30px;
+  top: 50%;
+  transform: translate(0, -50%);
+  display: flex;
+  gap: 20px;
+  box-shadow: inset 0 0 6px var(--main-color);
+  border-radius: 10px;
+  transition: width 0.5s linear;
+  z-index: -2;
+  padding: 10px;
 }
 
-.control>.colors>div {
-    height: 30px;
-    width: 30px;
-    cursor: pointer;
+.control > .colors > div {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
 }
 
-[data-color='#e91e63'] {
-    background: #e91e63;
+[data-color="#e91e63"] {
+  background: #e91e63;
 }
 
-[data-color='#009688'] {
-    background: #009688;
+[data-color="#009688"] {
+  background: #009688;
 }
 
-[data-color='#03a9f4'] {
-    background: #03a9f4;
+[data-color="#03a9f4"] {
+  background: #03a9f4;
 }
 
-[data-color='#0fffff'] {
-    background: #0fffff;
+[data-color="#0fffff"] {
+  background: #0fffff;
 }
 
 /* active */
-.control.active>span {
-    transform: rotate(-360deg);
+.control.active > span {
+  transform: rotate(-360deg);
 }
 
-.control.active>span+.colors {
-    width: calc(50px * var(--num-of-colors));
-    z-index: 1;
+.control.active > span + .colors {
+  width: calc(50px * var(--num-of-colors));
+  z-index: 1;
 }
 
 h1 {
-    border-radius: 5px;
-    text-align: center;
-    width: 100%;
-    color: var(--main-color);
-    font-size: 40px;
-    margin-top: 50px;
+  border-radius: 5px;
+  text-align: center;
+  width: 100%;
+  color: var(--main-color);
+  font-size: 40px;
+  margin-top: 50px;
 }
 
-h1>span {
-    font-size: 40px;
+h1 > span {
+  font-size: 40px;
 }
 
 /******************************  I/P **************************************/
 form {
-    width: max-content;
-    max-width: 100%;
-    margin: 5px auto;
-    padding: 20px;
-    position: relative;
+  width: max-content;
+  max-width: 100%;
+  margin: 5px auto;
+  margin-bottom: 20px;
+  padding: 20px;
+  position: relative;
 }
 
 form input {
-    display: block;
-    text-align: center;
-    outline: none;
-    border-radius: 30px;
-    font-size: 20px;
+  display: block;
+  text-align: center;
+  outline: none;
+  border-radius: 30px;
+  font-size: 20px;
 }
 
 form input#word {
-    width: 400px;
-    max-width: 100%;
-    padding: 30px;
-    color: var(--text-color);
-    border: none;
-    border-bottom: 2px solid var(--main-color);
-    border-top: 2px solid var(--main-color);
+  width: 400px;
+  max-width: 100%;
+  padding: 30px;
+  color: var(--text-color);
+  border: none;
+  border-bottom: 2px solid var(--main-color);
+  border-top: 2px solid var(--main-color);
 }
 
 form #wordLength {
-    position: absolute;
-    color: var(--main-color);
-    right: 50px;
-    bottom: 50%;
-    transform: translate(0, -50%);
-    font-size: 20px;
-    font-family: fantasy;
-    display: block;
+  position: absolute;
+  color: var(--main-color);
+  right: 50px;
+  bottom: 50%;
+  transform: translate(0, -50%);
+  font-size: 20px;
+  font-family: fantasy;
+  display: block;
 }
 
 form .alert {
-    position: absolute;
-    background-color: var(--main-color);
-    left: 50%;
-    top: 0;
-    transform: translate(-50%, 0);
-    font-size: 20px;
-    display: block;
-    padding: 10px;
-    width: max-content;
-    color: var(--text-color);
-    border-radius: 10px;
-    text-align: center;
-    opacity: 0;
-    visibility: hidden;
+  position: absolute;
+  background-color: var(--main-color);
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, 0);
+  font-size: 20px;
+  display: block;
+  padding: 10px;
+  width: max-content;
+  color: var(--text-color);
+  border-radius: 10px;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
 }
 form > .alert.active {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
-form input[type='submit'] {
-    width: 50px;
-    height: 50px;
-    min-width: max-content;
-    padding: 10px;
-    margin: 20px auto;
-    color: var(--main-color);
-    border: 2px solid var(--main-color);
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
+form .btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
 }
 
+form input[type="submit"],
+form .hintBtn {
+  width: 50px;
+  height: 50px;
+  min-width: max-content;
+  margin: 20px 0;
+  padding: 10px;
+  color: var(--main-color);
+  border: 2px solid var(--main-color);
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+form .hintBtn {
+  font-size: 20px;
+  text-align: center;
+  border-radius: 20px;
+}
+form .hint {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  min-height: 100%;
+  height: max-content;
+  color: #ddd;
+  background-color: #263238;
+  padding: 10px;
+  border-radius: 5px;
+  display: none;
+  z-index: 2;
+}
+form .hint p {
+  font-size: 20px;
+  padding: 5px;
+  border-bottom: 1px solid;
+}
+form .hint.show {
+  display: block;
+}
 /******************************  O/P **************************************/
 #output {
-    width: 600px;
-    margin: 0 auto;
-    max-width: 100%;
-    box-shadow: inset 0 0 10px var(--main-color);
-    position: relative;
-    z-index: 1;
-    border-radius: 10px;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap; 
+  width: 600px;
+  margin: 0 auto;
+  max-width: 100%;
+  box-shadow: inset 0 0 10px var(--main-color);
+  position: relative;
+  z-index: 1;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 #output.animation {
-    animation: anime 1S infinite linear;
-    animation-direction: alternate;
+  animation: anime 1s infinite linear;
+  animation-direction: alternate;
 }
 
 @keyframes anime {
-    0%,40%,80%{
-        background-color: var(--main-color);
-    }
-
-    20%,60%,100%{
-        background-color: transparent;
-    }
-}
-
-#output>p {
-    width: 40px;
-    color: #fff;
-    height: 40px;
-    position: relative;
+  0%,
+  40%,
+  80% {
     background-color: var(--main-color);
-    padding: 5px;
-    text-transform: capitalize;
-    text-align: center;
-    font-weight: bold;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    margin: 5px;
+  }
+
+  20%,
+  60%,
+  100% {
+    background-color: transparent;
+  }
 }
 
-@media (min-width:768px) {
-    #output>p {
+#output > p {
+  width: 40px;
+  color: #fff;
+  height: 40px;
+  position: relative;
+  background-color: var(--main-color);
+  padding: 5px;
+  text-transform: capitalize;
+  text-align: center;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+@media (min-width: 768px) {
+  #output > p {
     width: 50px;
     color: #fff;
     height: 50px;
     padding: 10px;
     margin: 10px;
-    }
+  }
 }
 
-#output .lettersNum { 
-    color: var(--text-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 25px;
-    height: 25px;
-    text-align: center;
-    border-radius: 50%;
-    font-weight: bold;
-    padding: 10px;
-    font-size: 16px;
-    margin-left: 5px;
-    background-color:var(--main-color);
+#output .lettersNum {
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  border-radius: 50%;
+  font-weight: bold;
+  padding: 10px;
+  font-size: 16px;
+  margin-left: 5px;
+  background-color: var(--main-color);
 }
 
 .tryAgain {
-    background-color: var(--main-color);
-    color: var(--text-color);
-    padding: 10px;
-    width: max-content;
-    margin: 10px auto;
-    cursor: pointer;
-    border-radius: 20px;
-    font-size: 14px;
-    display: none;
+  background-color: var(--main-color);
+  color: var(--text-color);
+  padding: 10px;
+  width: max-content;
+  margin: 10px auto;
+  cursor: pointer;
+  border-radius: 20px;
+  font-size: 14px;
+  display: none;
 }
 
 .tryAgain.active {
-    display: block;
+  display: block;
 }
 footer {
-    width: 100%;
-    text-align: center;
-    font-size: 20px;
-    color: #fff;
-    padding: 10px;
-    font-family: sans-serif;
-    font-weight: 800;
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  color: #fff;
+  padding: 10px;
+  font-family: sans-serif;
+  font-weight: 800;
 }
 
-footer>i,
+footer > i,
 footer .myName {
-    color: var(--main-color)
+  color: var(--main-color);
 }
